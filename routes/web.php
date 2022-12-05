@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PagesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/user/{id}', [UserController::class, 'show']);
+
+Route::get('/', [PagesController::class, 'fnIndex']);
+
+
+Route::get('/galeria/{numero?}', [PagesController::class, 'fnGaleria'])->where('numero', '[0-9]+')->name('xGaleria');
+
+
+
+Route::get('/lista', [PagesController::class, 'fnLista'])->name('xLista');
+
+/*
+Route::get('/lista', function () {
+    
+})->name('xLista');
+
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -26,3 +43,4 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+*/
