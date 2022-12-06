@@ -2,5 +2,8 @@
 
 @section('titulo')
     <h1>Página de galeria</h1>
-    <h3>Fotos... {{ $valor }} {{ $otro }}</h3>
+@endsection
+
+@section('seccion')
+    <h3>Foto de codigo {{ $valor }} {{ $otro }}</h3>
 @endsection

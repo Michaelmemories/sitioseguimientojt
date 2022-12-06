@@ -13,12 +13,17 @@
   <body>
 
     <div class="container my-5">
+      <a href="{{ route('xIndex') }}" class="btn btn-primary" >Inicio</a>
       <a href="{{ route('xGaleria') }}" class="btn btn-primary" >Galeria</a>
       <a href="{{ route('xLista') }}" class="btn btn-primary" >Lista</a>
     </div>
 
-    <div class="container">
+    <div class="container my-5">
       @yield('titulo')
+    </div>
+
+    <div class="container my-5">
+      @yield('seccion')
     </div>
 
     <div class="container bg-dark text-white text-center">
