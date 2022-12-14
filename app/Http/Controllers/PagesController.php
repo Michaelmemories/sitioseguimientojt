@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Models\Estudiante;
 
+use App\Models\Seguimiento;
+
 class PagesController extends Controller
 {
+    //////////////////////////Estudiante//////////////////////////////
+    
     public function fnIndex(){
         return view('welcome');
     }
@@ -93,4 +97,77 @@ class PagesController extends Controller
         //return view('pagGaleria', ['valor' => $numero, 'otro' => 25]);
         return view('pagGaleria', compact('valor', 'otro'));
     }
+
+    //////////////////////////Seguiminto//////////////////////////////
+
+    public function fnSeguimiento(){
+        $xSeguimiento = Seguimiento::paginate(4);      //Datos de BD
+        return view('pagSeguimiento', compact('xSeguimiento'));
+    }
+
+    public function fnSegDetalle($id){
+        $xDetSeguimiento = Seguimiento::findOrFail($id);     //Datos de BD po ID
+        return view('Seguimiento.pagDetalleSeg', compact('xDetSeguimiento'));
+    }
+
+    public function fnSegRegistrar(Request $request) {
+
+        //return $request;      //Verificando "token" y datos recibidos
+
+        $request -> validate([
+            'idEst'=>'required',
+            'traAct'=>'required',
+            'ofiAct'=>'required',
+            'satEst'=>'required',
+            'fecSeg'=>'required',
+            'estSeg'=>'required',
+        ]);
+
+        $nuevoSeguimiento = new Seguimiento;
+
+        $nuevoSeguimiento->idEst = $request->idEst;
+        $nuevoSeguimiento->traAct = $request->traAct;
+        $nuevoSeguimiento->ofiAct = $request->ofiAct;
+        $nuevoSeguimiento->satEst = $request->satEst;
+        $nuevoSeguimiento->fecSeg = $request->fecSeg;
+        $nuevoSeguimiento->estSeg = $request->estSeg;
+
+        $nuevoSeguimiento->save();                                   //Guarda en BD
+
+        //return view('pagLista');
+        return back()->with('msj','Se REGISTRO con exito...');      //Regresar
+    }
+
+    public function fnSegActualizar($id){
+        $xActSeguimiento = Seguimiento::findOrFail($id);     //Datos de BD po ID
+        return view('Seguimiento.pagActualizarSeg', compact('xActSeguimiento'));
+    }
+
+    public function fnSegUpdate(Request $request, $id) {
+
+        //return $request;      //Verificando "token" y datos recibidos
+
+        $xUpdateSeguimiento = Seguimiento::findOrFail($id);
+
+
+        $xUpdateSeguimiento->idEst = $request->idEst;
+        $xUpdateSeguimiento->traAct = $request->traAct;
+        $xUpdateSeguimiento->ofiAct = $request->ofiAct;
+        $xUpdateSeguimiento->satEst = $request->satEst;
+        $xUpdateSeguimiento->fecSeg = $request->fecSeg;
+        $xUpdateSeguimiento->estSeg = $request->estSeg;
+
+        $xUpdateSeguimiento->save();                                    //Guarda en BD
+
+        //return view('pagLista');
+        return back()->with('msj','Se ACTUALIZO con exito...');      //Regresar
+    }
+
+    public function fnSegEliminar($id){
+        $xdeleteSeguimiento = Seguimiento::findOrFail($id);     //Datos de BD po ID
+        $xdeleteSeguimiento->delete();
+
+        return back()->with('msj','Se ELIMINO con exito...');      //Regresar
+    }
+
 }

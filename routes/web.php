@@ -21,8 +21,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 */
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PagesController::class, 'fnLista'])->name('dashboard');
-
+//Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PagesController::class, 'fnLista'])->name('dashboard');
+/////////////////Tabla estudiante/////////////////////
 Route::get('/', [PagesController::class, 'fnIndex'])->name('xIndex');
 
 Route::post('/', [PagesController::class, 'fnRegistrar'])->name('Estudiante.xRegistrar');
@@ -38,6 +38,28 @@ Route::get('/detalle/{id}', [PagesController::class, 'fnEstDetalle'])->name('Est
 Route::get('/galeria/{numero?}', [PagesController::class, 'fnGaleria'])->where('numero', '[0-9]+')->name('xGaleria');
 
 Route::get('/lista', [PagesController::class, 'fnLista'])->name('xLista');
+
+
+////////////Tabla Seguimiento/////////////////////
+
+//Route::get('/actualizar/{id}', [PagesController::class, 'fnEstActualizar'])->name('Estudiante.xActualizar');
+
+
+
+//Route::get('/galeria/{numero?}', [PagesController::class, 'fnGaleria'])->where('numero', '[0-9]+')->name('xGaleria');
+
+Route::get('/seguimiento', [PagesController::class, 'fnSeguimiento'])->name('xSeguimiento');
+
+Route::get('/detalleSeg/{id}', [PagesController::class, 'fnSegDetalle'])->name('Seguimiento.xDetalleSeg');
+
+Route::post('registrar/', [PagesController::class, 'fnSegRegistrar'])->name('Seguimiento.xRegistrarSeg');
+
+Route::get('/actualizarSeg/{id}', [PagesController::class, 'fnSegActualizar'])->name('Seguimiento.xActualizarSeg');
+
+Route::put('/actualizarSeg/{id}', [PagesController::class, 'fnSegUpdate'])->name('Seguimiento.xUpdateSeg');
+
+Route::delete('/eliminarSeg/{id}', [PagesController::class, 'fnSegEliminar'])->name('Seguimiento.xEliminarSeg');
+
 
 /*
 Route::get('/lista', function () {

@@ -29,12 +29,11 @@
             </div>
         @enderror
 
-        @if($errors ->has('apeEst'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                El <strong>apellido</strong> es requerido
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        @error('apeEst')
+            <div class="alert alert-danger">
+            El apellido es requerido
             </div>
-        @endif
+        @enderror
 
         @error('fnaEst')
             <div class="alert alert-danger">
@@ -70,9 +69,9 @@
             <option value="2" @if ($xActAlumnos->turMat == 2) {{ "SELECTED" }} @endif>Turno Noche(2)</option>
             <option value="3" @if ($xActAlumnos->turMat == 3) {{ "SELECTED" }} @endif>Turno Tarde(3)</option>
         </select>
-        <select name="$xActAlumnos->semMat" class="form-control mb-2">
+        <select name="semMat" class="form-control mb-2">
             <option value="">Seleccione...</option>
-            @for($i=1; $i < 7; $i++)
+            @for($i=0; $i < 7; $i++)
                 <option value="{{$i}}" @if ($xActAlumnos->semMat == $i) {{ "SELECTED" }}  @endif>Semestre {{$i}}</option>
             @endfor
         </select>
@@ -81,7 +80,7 @@
             <option value="0"@if ($xActAlumnos->estMat == 0) {{ "SELECTED" }} @endif>Inactivo</option>
             <option value="1"@if ($xActAlumnos->estMat == 1) {{ "SELECTED" }} @endif>Activo</option>
         </select>
-        <button class="btn btn-warning" type="submit">Actualizar</button>
+        <button class="btn btn-outline-warning" type="submit">Actualizar</button>
     </form>
 
 @endsection

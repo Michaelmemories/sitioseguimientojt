@@ -13,10 +13,11 @@
   <body>
 
     <div class="container my-5">
-      <a href="{{ route('xIndex') }}" class="btn btn-primary" >Inicio</a>
-      <a href="{{ route('xGaleria') }}" class="btn btn-primary" >Galeria</a>
+      <a href="{{ route('xIndex') }}" class="btn btn-info" >Inicio</a>
+      <a href="{{ route('xGaleria') }}" class="btn btn-info" >Galeria</a>
       <!--<a href="{{ route('dashboard') }}" class="btn btn-primary" >Lista</a>   -->
-      <a href="{{ route('xLista') }}" class="btn btn-primary" >Lista</a>    
+      <a href="{{ route('xLista') }}" class="btn btn-info" >Lista</a> 
+      <a href="{{ route('xSeguimiento') }}" class="btn btn-info" >Seguimiento</a>   
     </div>
 
     <div class="container my-5">
@@ -27,7 +28,7 @@
       @yield('seccion')
     </div>
 
-    <div class="container bg-dark text-white text-center">
+    <div class="container bg-info text-white text-center">
       Pie de página
     </div>
     

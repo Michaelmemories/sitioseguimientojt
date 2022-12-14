@@ -1,7 +1,7 @@
 @extends('pagPlantilla')
 
 @section('titulo')
-    <h1 class="display-4">Página de Registro</h1>
+    <h1 class="display-4 ">Página de Registro</h1>
 @endsection
 
 @section('seccion')
@@ -27,12 +27,11 @@
             </div>
         @enderror
 
-        @if($errors ->has('apeEst'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                El <strong>apellido</strong> es requerido
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        @error('apeEst')
+            <div class="alert alert-danger">
+            El apellido es requerido
             </div>
-        @endif
+        @enderror
 
         @error('fnaEst')
             <div class="alert alert-danger">
@@ -61,7 +60,7 @@
         <input type="text" name="codEst" placeholder="Código" value="{{ old('codEst')}}" class="form-control mb-2">
         <input type="text" name="nomEst" placeholder="Nombres" value="{{ old('nomEst')}}" class="form-control mb-2">
         <input type="text" name="apeEst" placeholder="Apellidos" value="{{ old('apeEst')}}" class="form-control mb-2">
-        <input type="text" name="fnaEst" placeholder="Fecha de nacimiento" value="{{ old('fnaEst')}}" class="form-control mb-2">
+        <input type="date" name="fnaEst" placeholder="Fecha de nacimiento" value="{{ old('fnaEst')}}" class="form-control mb-2">
         <select name="turMat" class="form-control mb-2">
             <option value="">Seleccione...</option>
             <option value="1">Turno Día</option>
@@ -70,7 +69,7 @@
         </select>
         <select name="semMat" class="form-control mb-2">
             <option value="">Seleccione...</option>
-            @for($i=1; $i < 7; $i++)
+            @for($i=0; $i < 7; $i++)
                 <option value="{{$i}}">Semestre {{$i}}</option>
             @endfor
         </select>
@@ -79,14 +78,15 @@
             <option value="0">Inactivo</option>
             <option value="1">Activo</option>
         </select>
-        <button class="btn btn-primary" type="submit">Agregar</button>
+        
+        <button type="button" class="btn btn-outline-success">Agregar</button>
     </form>
 
     <hr>
-    <h3><center>Lista de alumnos Registrados</center></h3>
+    <h3><center>Lista de Registros</center></h3>
 
     <table class="table">
-        <thead class="table-dark">
+        <thead class="table-success">
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Código</th>
@@ -108,15 +108,16 @@
                 <td>{{ $item->semMat}}</td>
                 <td>
                     
+                    <a class="btn btn-warning btn-sm" href="{{route('Estudiante.xActualizar', $item->id ) }}">
+                    A
+                    </a>
+                    <-->
                     <form action="{{route('Estudiante.xEliminar', $item->id ) }}" method="post" class="d-inline">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm">X</button>
                     </form>
-                    ...
-                    <a class="btn btn-warning btn-sm" href="{{route('Estudiante.xActualizar', $item->id ) }}">
-                    A
-                    </a>
+
                 </td>
             </tr>
             @endforeach
